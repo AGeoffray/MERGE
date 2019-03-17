@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gruppo|Monofett|Muli|Srisakdi|Questrial" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MERGE - Rides</title>
+    <link rel="stylesheet" href="./assets/css/search.css">
+
+</head>
+
+<body>
+
+    <center>
+        <header>
+            <div id='welcomeHeader'></div>
+            <h2 id='titleHeader'>Let's Merge Together! <img id='logoHead' src='https://i.imgur.com/4WJuQnS.png'></h2>
+        </header>
+    </center>
+
+
+    <center>
+        <div id='content'></div>
+    </center>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script type='text/javascript'>
+
+        console.log("This page displays results when a user searches for rides by destination. Will show all available trips in the location selected, and if a username is clicked it will redirect the user to that user's page via 'community.handlebars' via route /friends/:id ");
+
+        // route to show all ride requests
+        $.ajax({
+            url: '/rides',
+            method: 'GET'
+        }).then(function (data) {
+            var count = 0;
+
+            // rides.tripId, rides.userId, rides.departure, rides.arrival, rides.trip_date,
+            // rides.trip_time, rides.notes, users.userId, users.username,
+            // users.email, users.photo, users.hasCar, ratings.rating
+
+            // tripId, userId, 
+
+            // establishing variables for each piece of data we retrieve 
+            var row1;
+            var col1;
+            var col2;
+            var col3;
+            var row2;
+
+            var $entireuserdiv;
+            var $userName;
+            var $userPic;
+            var $userEmail;
+            var $userHasCar;
+            var $tripTime;
+            var $tripDate;
+            var $tripId;
+            var $tripNotes;
+
+            var $locations;
+            var $carIcon;
+
+            // for loop to capture each ride from the db
+            for (var i = 0; i < data.length; i++) {
+
+                //console logging the user and trip destinations to ensure route is working properly 
+                console.log(data[i].userId + " " + data[i].username + ": FROM " + data[i].departure + " TO " + data[i].arrival);
+
+                //creating tags for our rows and cols
+                row1 = $('<div>');
+                col1 = $('<div>');
+                col2 = $('<div>');
+                col3 = $('<div>');
+                row2 = $('<div>');
+
+                // adding attributes to the cols and rows
+                row1.attr('class', 'row row1');
+                col1.attr('class', 'col col1');
+                col2.attr('class', 'col col2');
+                col3.attr('class', 'col col3');
+                row2.attr('class', 'row row2');
+
+                // Creating a tag for each data piece 
+                $entireuserdiv = $("<div>");
+                $userName = $("<a>");
+                $userPic = $('<img>');
+                $userHasCar = $('<div>');
+                $userEmail = $('<div>');
+                $tripTime = $('<div>');
+                $tripDate = $('<div>');
+                $tripId = $('<div>');
+                $tripNotes = $("<div>");
+                $locations = $('<div>');
+                $carIcon = $('<img>');
+
+                // "Entire user div" will hold all info for a specific user/ride. 
+                $entireuserdiv.attr('class', 'entireUser');
+                $userName.attr('href', '/userpage');
+                // $userName.attr('href', '/user'+data[i].userId) = WHAT WE WANT, via /userpage
+
+                // Capturing the username and user pic, and assigning class names to them
+                // Creating a route onclick to that user's page
+                $userName.attr('class', 'userName');
+                $userName.text(data[i].username);
+                $userName.attr('href', '/user/' + data[i].userId);
+
+                $userPic.attr('class', 'userPic');
+                $userPic.attr('src', data[i].photo);
+
+                // an IF ELSE statement to determine if the user has a car and convert the number (0 or 1) into user-friendly text
+                // Grabbing this data and throwing it into divs with class name 'hasAcar'
+                $userHasCar.attr('class', 'hasAcar');
+                var carStatus;
+                if (data[i].hasCar === 0) {
+                    carStatus = 'Driver Status: Passenger Only'
+                } else if (data[i].hasCar === 1) {
+                    carStatus = "Driver Status: Car Available"
+                } else {
+                    carStatus = 'Driver Status: Unknown'
+                }
+                $userHasCar.text(carStatus);
+
+                // Capturing the departure city and arrival city in the same div, and assigning class name 
+                $carIcon.attr('class', 'carIcon');
+                $carIcon.attr('src', 'https://i.imgur.com/LT0H7iy.png?1');
+                $locations.attr('class', 'destination');
+                $locations.append('START: ', data[i].departure, $carIcon, '<br>END: ', data[i].arrival);
+
+                // Capturing time in '.tripTime' div
+                $tripTime.attr('class', 'tripTime');
+                $tripTime.text(data[i].trip_time);
+
+                // Reading JUST the date from SQL trip_date data, in a user-friendly format so it is more legible 
+                var readableDate = data[i].trip_date[5] + data[i].trip_date[6] + data[i].trip_date[7] +
+                    data[i].trip_date[8] + data[i].trip_date[9] + data[i].trip_date[4] +
+                    data[i].trip_date[0] + data[i].trip_date[1] + data[i].trip_date[2] + data[i].trip_date[3];
+                // now displaying our readable date in the tripDate div, giving them all a class of 'tripDate'
+                $tripDate.attr('class', 'tripDate');
+                $tripDate.text(readableDate);
+
+                // Grabbing user email, trip ID and ride related notes from the db, putting them into divs and naming them 
+                $tripNotes.attr('class', 'tripNotes');
+                $tripNotes.text(data[i].notes);
+
+                $userEmail.attr('class', 'contactInfo');
+                $userEmail.text(data[i].email);
+
+                $tripId.attr('class', 'tripID');
+                $tripId.text(data[i].tripId);
+
+                // Now we will append pieces of data to their respective columns and rows, then append the cols to the rows they belong in
+
+                // $entireuserdiv.append($userPic, "<div class='nameAndinfo'>", $userName, '</div><br>', $tripNotes, '<br>', $locations, "<br>", $userHasCar, "<div class='dateAndtime'>", $tripDate, " AT ", $tripTime, "</div><br>", '<br>', $userEmail, "<br>", $userHasCar, '<br>');
+
+                // $entireuserdiv.append($userPic, $userName, $locations, $userEmail, '<br>', $tripDate, '<br>', $tripTime, $userHasCar);
+
+                col1.append($userPic, $userName);
+                col2.append($locations);
+                col3.append($userEmail, '<br><br><br>', $tripDate, '<br>', $tripTime);
+                row1.append(col1, col2, col3);
+                row2.append($userHasCar);
+
+                // Next we take all of this data and append it to the entireUser div, to display each ride individually
+                $entireuserdiv.append(row1, row2)
+
+                // appending the entire user div to our html via #content div
+                $("#content").append($entireuserdiv);
+            }
+        })
+
+
+
+    </script>
+</body>
+
+</html>

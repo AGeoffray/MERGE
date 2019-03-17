@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Corben|Fredericka+the+Great|Gruppo|Zilla+Slab+Highlight" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="/assets/javascript/app.js"></script>
+    <link rel='stylesheet' type='text/css' href="./assets/css/main.css">
+    <title>MERGE</title>
+
+</head>
+
+
+<body>
+
+    {{!-- THIS HEADER BAR APPEARS ON TOP OF EVERY HANDLEBARS PAGE --}}
+    <header>
+        <div class='row icon' id='bar'>
+            <span id='allIcons'>
+
+                {{!-- USERNAME APPEARS ON THE LEFT --}}
+                {{!-- {{#if user.username}} --}}
+                {{!-- <span id='displayname'>Welcome {{user.username}}</span> --}}
+                {{!-- {{else}} --}}
+                <span id='displayname'>
+                    <img id='globelogo' src='https://i.imgur.com/gSyeFzk.png'>
+                    <img id='m' src='https://i.imgur.com/3zCkp27.png'>
+                    <img class='e' src='https://i.imgur.com/UcBMxGL.png'>
+                    <img id='r' src='https://i.imgur.com/egxhAE1.png'>
+                    <img id='g' src='https://i.imgur.com/wD0XyNX.png'>
+                    <img class='e' src='https://i.imgur.com/UcBMxGL.png'>
+
+                </span>
+                {{!-- {{/if}} --}}
+
+
+                {{!-- FOLLOWING ICONS APPEAR INSIDE THE BAR (reverse order, because they are floating) --}}
+
+                {{!-- ABOUT US ICON --}}
+                <span class='iconImage'><a href='/about' id='aboutLink'><img src='https://i.imgur.com/j68zhMf.png' id='about-icon'
+                            class='iconImage' title="MERGE FAQs"></a></span>
+
+                {{!-- LOGOUT ICON --}}
+                {{!-- ***************************** --}}
+
+                <span class='iconImage'><a href='/logout' id='logoutlink'><img src="https://i.imgur.com/EbL9fBX.png"
+                            title="Logout" class='iconImage' id='logout-icon'></a></span>
+
+
+
+                {{!-- SEARCH BAR: includes form, label, and icon for submit button --}}
+                {{!-- *********************************************** --}}
+
+                <span id='entireSearchBar'>
+                    {{!-- search icon / form submit --}}
+                    <span class='iconImage'><a href='/search-cities'><img src="https://i.imgur.com/Fs4EQvk.png" title="Search"
+                                class='iconImage' id='search-icon' type='submit' for='searchbar'></a></span>
+
+                    {{!-- with ajax, each .searchItem is appended to the #searchbar dropdown menu --}}
+                    <form id='searchForm' class='iconImage' action='/search-cities' method="GET">
+                        <select id='searchbar' name='searchbar'></select>
+                    </form>
+
+                    <span class='iconImage' id='search'>Search: </span></span>
+
+                {{!-- ANOTHER TYPE OF SEARCH BAR: FREE TEXT RATHER THAN DROP DOWN MENU --}}
+                {{!-- <span id='entireSearchBar'>
+                    <form id='searchForm' class='iconImage' action='/search-cities' method="GET">
+                        <span class='iconImage'>
+                            <button type='submit'><img src='https://i.imgur.com/Fs4EQvk.png' title='Search' class='iconImage'
+                                    id='search-icon' type='submit'></button></span>
+                        <input type='text' name='searchbar' id='searchbar'> --}}
+                        {{!-- <select id='searchbar' name='searchbar'></select> --}}
+                        {{!-- </form>
+                    <span class='iconImage' id='search'>Search: </span>
+                </span> --}}
+
+
+                {{!-- REQUEST RIDE ICON --}}
+                <span class='iconImage'><a href='/ride_request'><img src='https://i.imgur.com/M5K9Ctr.png' title='Request A Ride'
+                            class='iconImage' id='request-icon'></a></span>
+
+
+
+                {{!-- RIDES ICON --}}
+                {{!-- ***************************--}}
+                {{#if user.hasCar}}
+                <span class='iconImage'><a href='/rides_forum'><img src='https://i.imgur.com/LT0H7iy.png?1' title='Check Ride Listings'
+                            class='iconImage' id='ride-icon'></a></span>
+                {{else}}
+                <span class='iconImage'><a href='/rides_forum'><img src='https://i.imgur.com/LT0H7iy.png?1' title='Check Ride Listings'
+                            class='iconImage' id='ride-icon'></a></span>
+                {{/if}}
+
+
+                {{!-- EDIT PROFILE ICON --}}
+                {{!--***************************--}}
+
+                <span class='iconImage'><a href='/accountsettings'><img src="https://i.imgur.com/68QL2gm.png" title="Account Settings"
+                            class='iconImage' id='edit-icon'></a></span>
+
+
+
+                {{!-- HOME ICON --}}
+                {{!--*******************--}}
+
+                <span class='iconImage'><a href='/userhome'><img src='https://i.imgur.com/9gkdUYU.png' title='Home'
+                            class='iconImage' id='home-icon'></a></span>
+
+
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {{{ body }}}
+
+    {{!-- <img id='image' src='/workersimage'> --}}
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+
+    <script>
+
+        //ajax call for dropdown searchbar, to appear on ALL handlebars pages
+        $.ajax({
+            url: '/cities',
+            method: 'GET'
+        }).then(function (data) {
+            var count = 0;
+            var $option;
+
+            for (var i = 0; i < data.length; i++) {
+
+                //check console log to ensure the route is working
+                console.log(data[i].city);
+
+                //for each city, we create a tag and store the data with a 'name' attribute.
+                $option = $("<option>");
+                $option.attr('class', 'searchItem');
+                $option.attr('name', 'searchCity');
+                $option.attr('id', data[i].city);
+                $option.text(data[i].city);
+
+                //appending each of the cities to the dropdown menu
+                $("#searchbar").append($option);
+            }
+        })
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

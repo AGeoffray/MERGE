@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Gruppo|Monofett|Muli|Srisakdi|Questrial" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./assets/css/home.css">
+    <title>MERGE</title>
+</head>
+
+
+
+<body>
+
+    <center>
+        <header>
+            <h4 id='welcomeHeader'>Welcome To</h4>
+            <h2 id='titleHeader'> <img id='logoHead' src='https://i.imgur.com/4WJuQnS.png'> Merge</h2>
+        </header>
+    </center>
+
+    <div class="col">
+
+        <div class="row">
+            <center>
+                <form id='signupform' action='/signup' method='GET'>
+                    <!-- Sign Up Instructions -->
+                    <div id='signupinstructions' class='formHeader'>Sign Up Now</div>
+                    <!-- name -->
+                    <div class='signupname tag'>Name</div>
+                    <input type='text' name='newname' id='newname' class='taginput'><br>
+                    <!-- email -->
+                    <div class='tag signupemail'>Email</div>
+                    <input type='email' name='newemail' id='newemail' class='taginput'><br>
+                    <!-- password -->
+                    <div class='tag signuppassword'>Choose a secure password</div>
+                    <input class='taginput' type='password' id='newpassword' name='newpassword'><br>
+                    <!-- has a car? -->
+                    <div id='hascar' class='tag'>
+                        Are you able to host? <div class='moreInfo tag'>What's this? <span class='moreInfoText'>Please
+                                check this box if you have a car that you are willing to use for carpool encounters.
+                                This will
+                                open possibilites for new commute buddies, as two people without a car will never
+                                be
+                                matched.</span></div><br>
+                        <input type='radio' name='newcar' id='caryes' value='true'><label for='caryes' class='hascar tag'>YES</label>
+                        <input type='radio' name='newcar' id='carno' value='false'><label for='carno' class='hascar tag'>NO</label>
+                    </div><br><br>
+                    <!-- photo -->
+                    {{!-- <div class='signupphoto tag'>Upload A Profile Picture </div><br>
+                    <input type='file' name='newpic' class='taginput' id='newpic'> --}}
+                    <div class='signupphoto tag'>Share a URL to use as your profile picture</div><br>
+                    <input type='text' name='newpic' class='taginput' id='newpic'>
+                    <br><br>
+                    <input type='submit' class='submitbtn'>
+                </form>
+            </center>
+        </div>
+
+    </div>
+
+
+    <div class="col">
+        <center>
+            <form id='loginform' action='/login' method="GET">
+                <!-- Login Instructions -->
+                <div id='logininstructions' class='formHeader'>Already A Member? Login</div>
+                <div class='tag email'>Email</div>
+                <input type='email' class='logininput' name='logemail' id='logemail'><br>
+                <div class='tag password'>Password</div>
+                <input type="password" name='logpassword' id='logpassword' class='logininput'><br>
+                <br><br>
+                <input type='submit' class='submitbtn'><br>
+                <a id='skipthisstep' href='/userhome'>Skip This Step</a>
+            </form>
+        </center>
+
+    </div>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- <script src='assets/routes/apiRoutes.js'></script> -->
+    <script>
+
+    </script>
+
+
+</body>
+
+</html>

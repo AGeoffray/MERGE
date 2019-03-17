@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gruppo|Life+Savers|Monofett|Srisakdi|Revalia|Questrial" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' type='text/css' href='./assets/css/riderequest.css'>
+    <title>MERGE - Ride Request</title>
+</head>
+
+
+
+<body>
+
+
+    <center>
+
+        <header>
+            <h4 id='rideMiniHeader'>Let others know where you're headed, so they can join you</h4>
+            <h2 id='rideHeader'>Ride Request</h2>
+        </header>
+
+
+        <form id='submitRideForm' action='/request/{{user.userId}}' method="POST">
+
+            <div id='startLabel' class='requestLabel'>Start Trip</div>
+            <select class='pickcity' id='submitStart' name='submitStart'></select><br>
+            <div id='endLabel' class='requestLabel'>End Trip</div>
+            <select class='pickcity' id='submitEnd' name='submitEnd'></select>
+
+            <br><br><br>
+
+            <span id='dateLabel' class='requestLabel'>Date</span>
+            <input type="date" id='submitDate' name='submitDate' class='datetimeinput'>
+            <span id='timeLabel' class='requestLabel'>Time</span>
+            <input type="time" id='submitTime' name='submitTime' class='datetimeinput'>
+
+            <br><br><br>
+
+            <span id='noteLabel' class='requestLabel'>Notes</span><br>
+            <textarea id='submitNote' name='submitNote' form="submitRideForm" placeholder='Is there anything you want your future commute buddy to know?'></textarea>
+
+            <br><br><br>
+
+            <input type='submit' id='requestDone'>
+        
+        </form>
+
+    </center>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script type='text/javascript'>
+
+
+        //ajax call for dropdown searchbar, to appear on ALL handlebars pages
+        $.ajax({
+            url: '/cities',
+            method: 'GET'
+        }).then(function (data) {
+            var count = 0;
+            var $startoption;
+            var $endoption;
+
+            for (var i = 0; i < data.length; i++) {
+
+                //check console log to ensure the route is working
+                console.log(data[i].city);
+
+                //for each city, we create a tag and store the data with a 'name' attribute.
+                $startoption = $("<option>");
+                $startoption.attr('class', 'startItem');
+                $startoption.attr('name', 'startCity');
+                $startoption.attr('id', data[i].city);
+                $startoption.text(data[i].city);
+
+                //appending each of the cities to the start select in our form
+                $("#submitStart").append($startoption);
+
+                //for each category, we create a tag and store the data with a 'name' attribute.
+                $endOption = $("<option>");
+                $endOption.attr('class', 'endItem');
+                $endOption.attr('name', 'endCity');
+                $endOption.attr('id', data[i].city);
+                $endOption.text(data[i].city);
+
+                //appending each of the categories to the dropdown menu
+                $("#submitEnd").append($endOption);
+
+            }
+        })
+
+    </script>
+
+</body>
+
+
+</html>

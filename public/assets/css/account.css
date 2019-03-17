@@ -1,0 +1,141 @@
+* {
+    background: url('https://i.imgur.com/u3hio3w.png') center fixed no-repeat;
+    background-size: cover;
+}
+
+
+#welcomeHeader {
+    font-family: 'gruppo', cursive;
+    color:rgb(245, 235, 185);
+    text-shadow:  rgb(247, 224, 99);
+    background: rgb(74, 102, 18);
+    font-size: 20px;
+    margin-bottom: 2%;
+    border-top: 3px double rgb(247, 224, 99);
+}
+
+#titleAccount {
+    font-family: 'Monofett', cursive;
+    font-size: 70px;
+    background: rgb(238, 250, 237);
+    color: rgb(253, 250, 229);
+    text-shadow: 4px 4px rgb(52, 71, 12);
+    opacity: 0.8;
+    margin-top: -2%;
+    margin-bottom: 3.5%;
+    font-weight: bold;
+    float: left;
+    width: 100%;
+    height: 90px;
+    border-bottom: 4px ridge rgb(74, 102, 18);
+}
+
+/* cols and layout */
+
+#leftUcol {
+    float: left;
+    width: 40%;
+}
+#rightUcol {
+    float: left;
+    width: 60%;
+}
+
+form {
+    width: 85%;
+    border-bottom: 2px ridge green;
+    padding: 10px;
+}
+#updatePhotoForm {
+    border-bottom: none;
+}
+
+
+/* form styling */
+
+
+.textf {
+    padding: 15px;
+}
+#updateCarForm {
+    padding: 8px;
+    line-height: 30px;
+}
+textarea {
+    width: 80%;
+    height: 110px;
+}
+.formComment {
+    font-family: 'gruppo', cursive;
+    font-weight: bold;
+    padding: 12px;
+    font-size: 18px;
+}
+.miniformComment, .current {
+    font-size: 14px;
+    font-family: 'gruppo', cursive;
+    font-weight: bold;
+}
+.submitUpdate {
+    width: 20%;
+    background: rgb(191, 221, 188);
+    border: 2px ridge rgb(238, 250, 237);
+}
+.submitUpdate:hover {
+    background: rgb(238, 250, 237);
+    cursor: pointer;
+}
+#hillsLogo {
+    width: 100px;
+}
+
+/* hover over to see current photo */
+
+
+.currentPhotoHoverHere {
+position: relative;
+display: inline-block;
+border-bottom: 1px dotted black; 
+font-size: 15px;
+color: rgb(13, 112, 58);
+}
+
+.currentPhotoHoverHere #currentPhotoDisplay::after {
+content: "";
+position: absolute;
+margin-top: 90%; /* At the bottom of the tooltip */
+left: 130%;
+margin-left: -5px;
+padding: 5px;
+}
+
+.currentPhotoHoverHere #currentPhotoDisplay {
+visibility: hidden;
+background: rgb(238, 250, 237);
+color: #fff;
+font-family: 'gruppo', sans-serif;
+font-size: 18px;
+text-align: center;
+border-radius: 7px;
+padding: 10px;
+width: 200px;
+height: 200px;
+/*use half of the width (120/2=60) to center the tool tip */
+/* Position the currentPhotoHoverHere */
+position: absolute;
+/* z-index: 1; */
+}
+.nowPhoto {
+width: 150px;
+}
+
+#currentPhotoDisplay {
+margin-top: -500px;
+margin-left: -100px;
+}
+
+.currentPhotoHoverHere:hover #currentPhotoDisplay {
+visibility: visible;
+
+}
+

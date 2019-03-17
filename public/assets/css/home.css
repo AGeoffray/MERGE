@@ -1,0 +1,166 @@
+
+    * {
+        background: url('https://i.imgur.com/J0cBm9e.jpg') center no-repeat fixed;
+        background-size: cover;
+    }
+
+    /* Header styles and formatting */
+
+    #welcomeHeader {
+        font-family: 'gruppo', cursive;
+        color: rgb(23, 114, 128);
+        text-shadow: rgb(59, 179, 129);
+        background: rgb(59, 179, 129);
+        font-size: 20px;
+        margin-bottom: 2%;
+        border-top: 3px double rgb(235, 226, 190);
+    }
+
+    #titleHeader {
+        font-family: 'Monofett', cursive;
+        font-size: 100px;
+        background: rgb(133, 226, 187);
+        color: rgb(239, 244, 248);
+        text-shadow: 4px 4px rgb(59, 179, 129);
+        opacity: 0.8;
+        margin-top: -2%;
+        margin-bottom: 3.5%;
+        font-weight: bold;
+        float: left;
+        width: 100%;
+        height: 120px;
+        border-bottom: 4px ridge rgb(59, 179, 129);
+    }
+
+    #logoHead {
+        height: 100px;
+        background: none;
+    }
+
+    .col {
+        width: 50%;
+        float: left;
+    }
+
+    /* Form Styles */
+
+.formHeader {
+    background: rgb(62, 194, 139);
+    border-bottom: 4px ridge rgb(34, 133, 91);
+    color: white;
+    text-shadow: 2px 2px rgb(21, 126, 82);
+    height: 30px;
+    font-family: 'gruppo', sans-serif;
+    font-size: 25px;
+}
+#loginform {
+    float: left;
+    width: 90%;
+    background: rgb(235, 245, 217);
+    border: 2px ridge rgb(137, 230, 191);
+    font-family: 'gruppo', sans-serif;
+    padding: 5px;
+    margin-left: 2.5%;
+    box-shadow: 2px 2px rgb(160, 153, 121);
+}
+
+#signupform {
+    margin-left: 2.5%;
+    border: 2px ridge rgb(137, 230, 191);
+    box-shadow: 2px 2px rgb(160, 153, 121);
+}
+
+#signupform, .tag {
+    background: rgb(235, 245, 217);
+    width: 90%;
+    padding: 5px;
+    font-family: 'Questrial', sans-serif;
+    font-size: 18px;
+}
+
+.taginput, .logininput {
+    background: rgb(226, 247, 243);
+    width: 80%;
+    border: 2px ridge rgb(144, 196, 47);
+}
+
+.submitbtn {
+    background: rgb(137, 230, 191);
+    border: 2px ridge rgb(129, 209, 176);
+    font-family: 'gruppo', sans-serif;
+    font-weight: bold;
+    width: 20%;
+    font-size: 20px;
+    color: rgb(10, 104, 65);
+    padding: 2px;
+    margin-bottom: 5px;
+}
+.submitbtn:hover {
+    background: rgb(74, 151, 132);
+    border: 2px ridge rgb(180, 243, 217);
+    color: rgb(179, 243, 216);
+}
+
+#skipthisstep {
+    background: rgb(235, 245, 217);
+    font-family: 'gruppo', sans-serif;
+    float: right;
+    padding: 10px;
+    font-size: 20px;
+    color: rgb(34, 133, 91);
+}
+#skipthisstep:hover {
+    color: rgb(131, 216, 131);
+    text-shadow: 2px 2px white;
+    font-weight: bold;
+    border-bottom: 1px ridge white;
+}
+
+
+/* <!-- "What's This?" styles for HasCar info hover button --> */
+
+.moreInfo {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; */
+  font-size: 15px;
+  color: rgb(13, 112, 58);
+}
+
+.moreInfo .moreInfoText::after {
+  content: " ";
+  position: absolute;
+  top: 130%; /* At the bottom of the tooltip */
+  left: 130%;
+  margin-left: -5px;
+  padding: 5px;
+}
+
+.moreInfo .moreInfoText {
+  visibility: hidden;
+  width: 120px;
+  background: rgb(59, 179, 129);
+  color: #fff;
+  font-family: 'gruppo', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 7px;
+  padding: 10px;
+  width: 270px;
+  height: 150px;
+  bottom: 50%;
+  left: -50%; 
+  /*use half of the width (120/2=60) to center the tool tip */
+  margin-left: -60px; 
+  /* Position the moreInfo */
+  position: absolute;
+  /* z-index: 1; */
+}
+
+.moreInfo:hover .moreInfoText {
+  visibility: visible;
+  top: -5px;
+  left: 115%; 
+
+}
+

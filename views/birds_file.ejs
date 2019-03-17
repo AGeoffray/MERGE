@@ -1,0 +1,38 @@
+<style>
+form {
+	display: inline;
+}
+</style>
+<h1>all birds</h1>
+
+<ul>
+	<% for (var i=0; i<data.length; i++) { %>
+	    <li>
+	    	<%= data[i].name %>
+
+	    	<form action="/delete-bird" method="GET">
+	    		<input type="hidden" name="idd" value="<%= data[i].id %>"> 
+	    		<button>delete bird</button>
+	    	</form>
+	    </li>
+	<% } %>
+</ul>
+
+<form action='/insert-bird' method="POST">
+	<input type="text" name="nam" placeholder="insert a bird name">
+
+	<button>submit</button>
+</form>
+
+<br><br>
+
+<h2> Update bird's name</h2>
+
+<form action='/update-bird' method="GET">
+	<input type="text" name="idd" placeholder="insert a bird id">
+	<input type="text" name="nam" placeholder="insert a bird name">
+
+	<button>update bird's name</button>
+</form>
+
+

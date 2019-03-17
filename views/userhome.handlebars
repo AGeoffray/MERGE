@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Gruppo|Life+Savers|Monofett|Montserrat+Subrayada|Muli|Srisakdi|Revalia|Questrial"
+        rel="stylesheet">
+    {{!-- Srisakdi font is the pretty wavy font, Life Savers is extra curly handwriting style. may remove if not using
+    --}}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href='./assets/css/userhome.css'>
+    <title>MERGE</title>
+</head>
+
+<body>
+
+    {{!--
+    <center>
+        <header>
+            <div id='welcomeHeader'></div>
+            <h2 id='titleHeader'><img id='logoHead' src='https://i.imgur.com/4WJuQnS.png'> Merge</h2>
+        </header>
+    </center> --}}
+
+    <center>
+
+        <div class='leftCol' id='userContent'>
+            <div class='userleftcol'>
+                <div class='row userCol' id='userNameDisplay'></div>
+                <div class='row userCol' id='userCarDisplay'></div>
+                <div class='row userCol' id='userEmailDisplay'></div>
+            </div>
+            <div class='userrightcol'>
+                <div class='row userCol' id='userPhotoDisplay'></div>
+            </div><br>
+            <div class='userbottomrow'>
+                <div class='row userCol' id='userBioDisplay'></div>
+            </div>
+        </div>
+
+    </center>
+
+
+    <div class='rightCol' id='scoreContent'>
+        <div id='scoreHeaderRow'>
+            <div class='authorCol scoreHead' id='authorHead'>User# </div>
+            <div class='ratingCol scoreHead' id='ratingHead'>Rating: </div>
+            <div class='reviewCol scoreHead' id='reviewHead'>Comments: </div>
+        </div>
+        <div class='authorCol scorecol' id='scoreIdDisplay'></div>
+        <div class='ratingCol scorecol' id='scoreRatingDisplay'></div>
+        <div class='reviewCol scorecol' id='scoreReviewDisplay'></div>
+    </div>
+
+
+
+    <center>
+
+        <div class='bottomRow' id='rideContent'>
+            <div id='ridesHeaderDisplay'></div>
+            <div id='ridesMiniHeader'></div>
+            <div class='col rideCol' id='rideIdDisplay'></div>
+            <div class='col rideCol' id='rideStartDisplay'></div>
+            <div class='col rideCol' id='rideEndDisplay'></div>
+            <div class='col rideCol' id='rideDateDisplay'></div>
+            <div class='col rideCol' id='rideTimeDisplay'></div>
+        </div>
+
+    </center>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script type='text/javascript'>
+
+        $.ajax({
+            url: 'http:/localhost:3000/user/{{user.userId}}',
+            method: 'GET'
+        }).then(function (data) {
+
+            console.log(data[0].username + " is the username.");
+
+            //***********************
+            // user info
+            //**********************
+
+            $username = $("<div>");
+            $userCar = $("<div>");
+            $userphoto = $("<img>");
+            $userEmail = $("<div>");
+            $userbio = $("<div>");
+
+            $username.attr('class', 'userName userItem');
+            $username.text(data[0].username);
+
+            var driverStatus;
+            if (data[0].hasCar === 0) {
+                driverStatus = 'Driver Status: Passenger Only'
+            } else if (data[0].hasCar === 1) {
+                driverStatus = "Driver Status: Car Available"
+            } else {
+                driverStatus = 'Driver Status: Unknown'
+            }
+
+            $userCar.attr('class', 'userCar userItem');
+            $userCar.text(driverStatus);
+
+            $userphoto.attr('class', 'userPhoto userItem');
+            $userphoto.attr('src', data[0].photo);
+
+            $userEmail.attr('class', 'userEmail userItem');
+            $userEmail.text(data[0].email);
+
+            $userbio.attr('class', 'userBio userItem');
+            $userbio.text(data[0].bio);
+
+            $("#userNameDisplay").append($username);
+            $("#userCarDisplay").append($userCar);
+            $("#userPhotoDisplay").append($userphoto);
+            $("#userEmailDisplay").append($userEmail);
+            $("#userBioDisplay").append($userbio);
+
+            //*********************************
+            // user's ride request data
+            //********************************
+
+            $tripId = $("<div>");
+            $tripStart = $("<div>");
+            $tripEnd = $("<div>");
+            $tripDate = $("<div>");
+            $tripTime = $("<div>");
+            $tripNotes = $("<div>");
+
+            $tripId.attr('class', 'tripId tripItem');
+            $tripId.text(data[0].tripId);
+            $("#rideIdDisplay").append("<span class='tripLabel'>Trip#", "</span><br><br>", $tripId);
+
+            $tripStart.attr('class', 'tripStart tripItem');
+            $tripStart.text(data[0].departure);
+            $("#rideStartDisplay").append("<span class='tripLabel'>Start", "</span><br><br>", $tripStart);
+
+            $tripEnd.attr('class', 'tripEnd tripItem');
+            $tripEnd.text(data[0].arrival);
+            $("#rideEndDisplay").append("<span class='tripLabel'>End", "</span><br><br>", $tripEnd);
+
+            var readableDate = data[0].trip_date[5] + data[0].trip_date[6] + data[0].trip_date[7] +
+                data[0].trip_date[8] + data[0].trip_date[9] + data[0].trip_date[4] +
+                data[0].trip_date[0] + data[0].trip_date[1] + data[0].trip_date[2] + data[0].trip_date[3];
+
+            $tripDate.attr('class', 'tripDate tripItem');
+            $tripDate.text(readableDate);
+            $("#rideDateDisplay").append("<span class='tripLabel'>Date", "</span><br><br>", $tripDate);
+
+            $tripTime.attr('class', 'tripTime tripItem');
+            $tripTime.text(data[0].trip_time);
+            $("#rideTimeDisplay").append("<span class='tripLabel'>Time", "</span><br><br>", $tripTime);
+
+            $tripNotes.attr('class', 'tripNotes tripItem');
+            $tripNotes.html("<img id='notesIcon' src='https://i.imgur.com/KywaF7T.png'><span id='tripNotes'>" + data[0].notes + "</span>");
+            //    $("#ridesMiniHeader").append($tripNotes);
+
+            $rideHead = $("<div>");
+            $rideHead.attr('class', 'ridesHeader');
+            $rideHead.text(data[0].username + "'s Ride Request");
+            $("#ridesHeaderDisplay").append($rideHead, $tripNotes);
+
+            //********************************
+            // User's Reviews and Scores Data
+            //*********************************
+
+            for (var i = 0; i < data.length; i++) {
+
+                $ratings = $("<div>");
+                $reviews = $("<div>");
+                $ratingAuthor = $("<div>");
+
+                $ratingAuthor.attr('class', 'authorId cell');
+                $ratingAuthor.text(data[i].authorId);
+                $("#scoreIdDisplay").append($ratingAuthor);
+
+                $ratings.attr('class', 'rating cell');
+
+                if (data[i].rating === 5) {
+                    $ratings.html("<img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'>");
+                } else if (data[i].rating === 4) {
+                    $ratings.html("<img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'>")
+                } else if (data[i].rating === 3) {
+                    $ratings.html("<img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'>")
+                } else if (data[i].rating === 2) {
+                    $ratings.html("<img class='star' src='https://i.imgur.com/33EZHBO.png'><img class='star' src='https://i.imgur.com/33EZHBO.png'>")
+                } else if (data[i].rating === 1) {
+                    $ratings.html("<img class='star' src='https://i.imgur.com/33EZHBO.png'>")
+                } else {
+                    $starRating = "unavailable";
+                }
+
+                $("#scoreRatingDisplay").append($ratings);
+
+                $reviews.attr('class', 'review cell');
+                $reviews.text(data[i].review);
+                $("#scoreReviewDisplay").append($reviews);
+
+            }
+
+        })
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

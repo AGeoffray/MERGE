@@ -1,0 +1,97 @@
+* {
+    background: url('https://i.imgur.com/sKxLgmE.png') center fixed no-repeat;
+    background-size: cover;
+}
+
+#leftCol {
+    float: left;
+    width: 53%;
+    font-size: 13px;
+    padding: 5px;
+    margin-left: 2%;
+    margin-top: 2.5%;
+    font-family: 'Oxygen', sans-serif;
+    text-align: justify;
+    line-height: 125%;
+
+}
+#aboutLogo {
+    float: left;
+    padding: 6px;
+    word-wrap: normal;
+    width: 340px;
+}
+#mergetogether {
+    color: rgb(50, 124, 41);
+    font-weight: bold;
+}
+#lastline {
+    font-size: 11px;
+}
+
+#signature {
+    font-family: 'Srisakdi', cursive;
+    font-weight: bold;
+    font-size: 17px;
+}
+/* contact box */
+
+#rightCol {
+float: left;
+width: 40%;
+text-align: left;
+margin-left: 2.5%;
+margin-top: 2%;
+}
+
+
+input[type=text], select, textarea {
+font-family: 'Oxygen', sans-serif;
+width: 100%;
+padding: 12px;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+margin-top: 6px;
+margin-bottom: 16px;
+resize: vertical;
+background: rgb(246, 252, 245);
+color: #777777;
+}
+
+input[type=submit] {
+font-family: 'Oxygen', sans-serif;
+background: rgb(160, 214, 155);
+color: white;
+padding: 12px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+/*#canadaoption, #usaoption {
+color: rgb(87, 87, 189);
+font-weight: bold;
+}*/
+
+input[type=submit]:hover {
+background:#4aaaa5;
+color: #777777;
+}
+
+#contactContainer {
+border-radius: 5px;
+border: 2px inset rgb(148, 216, 141);
+padding: 20px;
+font-family: 'gruppo', sans-serif;
+}
+
+h3 {
+font-family: 'gruppo', sans-serif;
+align: center;
+color: #4aaaa5;
+}
+#quill {
+width: 50px;
+}
+
